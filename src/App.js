@@ -1,8 +1,8 @@
-import './App.css';
+import "./styles/global.css";
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <h1>WORLD OF COLORS</h1>
     </div>
   );
