@@ -1,0 +1,60 @@
+.snackbar {
+  width: 85%;
+  position: fixed;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+  color: #fff;
+  padding: 0.75rem 1rem;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease-in;
+}
+
+.snackbar.visible {
+  pointer-events: all;
+  opacity: 1;
+}
+
+.snackbar.success {
+  background-color: seagreen;
+}
+
+.snackbar.error {
+  background-color: crimson;
+}
+
+.text {
+  text-transform: uppercase;
+  /* background-color: red; */
+  flex: 1;
+  margin-right: 0.25rem;
+}
+
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  margin-right: 0.25rem;
+}
+
+.hideSnackbarBtn {
+  width: 1.75rem;
+  height: 1.75rem;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1rem;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.25);
+  color: inherit;
+}

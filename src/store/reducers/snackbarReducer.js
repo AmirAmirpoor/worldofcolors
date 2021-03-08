@@ -2,7 +2,8 @@ import { SHOW_SNACKBAR, HIDE_SNACKBAR } from "../actions/snackbarActions";
 
 const initialState = {
   isVisible: false,
-  text: "",
+  text: "palette generated successfully",
+  type: "error", // success, error
 };
 
 export const snackbarReducer = (state = initialState, action) => {
@@ -13,7 +14,8 @@ export const snackbarReducer = (state = initialState, action) => {
       return {
         ...state,
         isVisible: true,
-        text: payload.snackbarText,
+        type: payload.type,
+        text: payload.text,
       };
     case HIDE_SNACKBAR:
       return { ...state, isVisible: false };
