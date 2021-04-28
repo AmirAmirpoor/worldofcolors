@@ -2,8 +2,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { hide_snackbar } from "../../store/actions/snackbarActions";
 
-// react icons
-import { CgClose as CloseIcon } from "react-icons/cg";
+// icons
+import { CloseIcon } from "../../helpers/icons";
 
 // styles
 import classes from "./Snackbar.module.css";

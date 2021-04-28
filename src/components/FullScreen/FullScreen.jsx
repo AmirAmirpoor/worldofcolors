@@ -2,8 +2,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { hide_fullscreen } from "../../store/actions/fullScreenActions";
 
-// react icons
-import { CgClose as CloseIcon } from "react-icons/cg";
+// icons
+import { CloseIcon } from "../../helpers/icons";
 
 // styles
 import classes from "./FullScreen.module.css";
