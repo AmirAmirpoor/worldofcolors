@@ -1,11 +1,11 @@
+// redux stuff
 import { useSelector, useDispatch } from "react-redux";
 import { hide_snackbar } from "../../store/actions/snackbarActions";
 
 // react icons
 import { CgClose as CloseIcon } from "react-icons/cg";
-import { FiCheckCircle as SuccessIcon } from "react-icons/fi";
-import { BiErrorAlt as ErrorIcon } from "react-icons/bi";
 
+// styles
 import classes from "./Snackbar.module.css";
 
 const Snackbar = () => {
@@ -14,21 +14,10 @@ const Snackbar = () => {
 
   const hideSnackbar = () => dispatch(hide_snackbar());
 
+  const typeClass = type === "error" ? classes.error : classes.success;
+  const visibleClass = isVisible ? classes.visible : null;
   return (
-    <div
-      className={[
-        classes.snackbar,
-        isVisible && classes.visible,
-        type === "success" ? classes.success : classes.error,
-      ].join(" ")}
-    >
-      <span className={classes.icon}>
-        {type === "success" ? (
-          <SuccessIcon />
-        ) : (
-          <ErrorIcon style={{ fontSize: "1.35rem" }} />
-        )}
-      </span>
+    <div className={`${classes.snackbar} ${visibleClass} ${typeClass}`}>
       <p className={classes.text}>{text}</p>
 
       <button className={classes.hideSnackbarBtn} onClick={hideSnackbar}>

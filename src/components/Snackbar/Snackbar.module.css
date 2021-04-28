@@ -8,7 +8,9 @@
   align-items: center;
   max-width: 500px;
   color: #fff;
+  background-color: #fff;
   padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
   z-index: 1000;
   opacity: 0;
   pointer-events: none;
@@ -21,16 +23,19 @@
 }
 
 .snackbar.success {
-  background-color: seagreen;
+  color: seagreen;
+  background-color: rgb(193, 247, 216);
+  box-shadow: 0 0 15px rgb(193, 247, 216);
 }
 
 .snackbar.error {
-  background-color: crimson;
+  color: crimson;
+  background-color: #fdc9d4;
+  box-shadow: 0 0 15px #fdc9d4;
 }
 
 .text {
   text-transform: uppercase;
-  /* background-color: red; */
   flex: 1;
   margin-right: 0.25rem;
 }
@@ -48,13 +53,19 @@
 .hideSnackbarBtn {
   width: 1.75rem;
   height: 1.75rem;
-  background-color: red;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 1.1rem;
   border-radius: 50%;
   border: none;
-  background-color: rgba(0, 0, 0, 0.25);
   color: inherit;
+}
+
+.snackbar.error .hideSnackbarBtn {
+  background-color: rgba(220, 20, 60, 0.137);
+}
+
+.snackbar.success .hideSnackbarBtn {
+  background-color: rgba(46, 139, 86, 0.13);
 }
