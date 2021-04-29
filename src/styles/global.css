@@ -4,14 +4,48 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-size: inherit;
 }
 
 body {
   font-family: "Nunito", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
 }
 
 button {
   font-family: inherit;
   cursor: pointer;
   outline: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* container wraps main and aside */
+.container {
+  display: flex;
+  height: 100%;
+}
+
+.main {
+  flex: 2;
+  background-color: #fff;
+}
+
+.aside {
+  flex: 1;
+  background-color: #f2f5fa;
+}
+
+@media screen and (max-width: 980px) {
+  .main {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .aside {
+    display: none;
+  }
 }

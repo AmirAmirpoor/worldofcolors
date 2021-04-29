@@ -1,7 +1,12 @@
 // react router dom imports
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+
+// pages
+import Home from "./pages/Home/Home.jsx";
+import Generate from "./pages/Generate/Generate.jsx";
 
 // components
+import Layout from "./components/Layout/Layout.jsx";
 import Snackbar from "./components/Snackbar/Snackbar.jsx";
 import FullScreen from "./components/FullScreen/FullScreen.jsx";
 
@@ -11,23 +16,15 @@ import "./styles/global.css";
 function App() {
   return (
     <div>
-      {/* test */}
-      <nav>
-        <Link to="/">home</Link>
-        <Link to="/generate">generate palette</Link>
-      </nav>
+      <Layout>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/generate" component={Generate} />
+        </Switch>
+      </Layout>
 
       <Snackbar />
       <FullScreen />
-
-      <Switch>
-        <Route exact path="/" render={() => <h1>Home page</h1>} />
-        <Route
-          exact
-          path="/generate"
-          render={() => <p>generate new palette page</p>}
-        />
-      </Switch>
     </div>
   );
 }
