@@ -5,6 +5,7 @@ import { MdPalette as PaletteIcon } from "react-icons/md";
 import { IoMdHeart as HeartIcon } from "react-icons/io";
 import { IoIosColorFill as ColorIcon } from "react-icons/io";
 import { MdGradient as GradientIcon } from "react-icons/md";
+import { IoIosArrowForward as RightIcon } from "react-icons/io";
 
 export {
   CloseIcon,
@@ -14,4 +15,5 @@ export {
   HeartIcon,
   ColorIcon,
   GradientIcon,
+  RightIcon,
 };
