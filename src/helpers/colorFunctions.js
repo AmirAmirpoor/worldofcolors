@@ -5,7 +5,7 @@ export const colorFormats = ({ value: hex }) => {
 
   const joinByComma = (arr) => arr.map((x) => x.toFixed(2)).join(", ");
 
-  details.push({ label: "HEX", value: hex });
+  details.push({ label: "HEX", value: hex.slice(1).toUpperCase() });
   details.push({ label: "RGB", value: chroma(hex).rgb().join(", ") });
   details.push({ label: "RGBA", value: chroma(hex).rgba().join(", ") });
   details.push({ label: "HSL", value: joinByComma(chroma(hex).hsl()) });
