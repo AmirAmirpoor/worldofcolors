@@ -51,3 +51,24 @@ ul {
     display: none;
   }
 }
+
+.btn {
+  border: none;
+  text-transform: uppercase;
+  outline: none;
+  font-size: 0.85em;
+  padding: 0.5em;
+  background-color: transparent;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  border-radius: 0.5em;
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #555;
+}
+
+.btn-red {
+  color: crimson;
+  box-shadow: 0 0 2px rgba(216, 66, 96, 0.5);
+}

@@ -10,8 +10,9 @@ import Layout from "./components/Layout/Layout.jsx";
 import Snackbar from "./components/Snackbar/Snackbar.jsx";
 import FullScreen from "./components/FullScreen/FullScreen.jsx";
 
-// style
+// styles
 import "./styles/global.css";
+import "./styles/utils.css";
 
 function App() {
   return (

@@ -4,7 +4,13 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 // icons
-import { RightIcon } from "../../helpers/icons";
+import { HeartIcon } from "../../helpers/icons";
+
+// chroma-js
+import chroma from "chroma-js";
+
+// colorFormats
+import { colorFormats } from "../../helpers/colorFunctions";
 
 // styles
 import classes from "./Home.module.css";
@@ -12,22 +18,26 @@ import classes from "./Home.module.css";
 const Home = () => {
   const palettes = useSelector((state) => state.palettes);
   const [selected, setSelected] = useState(false);
+  const [colorId, setColorId] = useState(0);
 
   const renderPalette = (palette) => {
     const { id, name, colors, isFavorite } = palette;
-    const notSelected = selected && selected !== id;
-    const className = `${classes.palette} ${
-      notSelected && classes.notSelected
-    }`;
     return (
-      <div key={id} className={className}>
+      <div key={id} className={classes.palette}>
         <div className={classes.palette__header}>
           <span
             className={classes.palette__name}
-            onClick={() => setSelected(id)}
+            onClick={() => {
+              setColorId(0);
+              setSelected(id);
+            }}
           >
             {name}
           </span>
+
+          {isFavorite && (
+            <HeartIcon style={{ color: "crimson", fontSize: "1.25rem" }} />
+          )}
         </div>
         <div className={classes.palette__colors}>
           {colors.map(({ id, value }) => {
@@ -39,11 +49,63 @@ const Home = () => {
     );
   };
 
+  const redirectToGenerator = (colors) => {
+    const concatHexValues = colors.map(({ value }) => value.slice(1)).join("-");
+    const link = `/generate?colors=${concatHexValues}`;
+
+    alert(link);
+  };
+
   const renderSelectedPalette = () => {
     if (!selected) return null;
-    const palette = palettes.find(({ id }) => id === selected);
+    const { colors, isFavorite } = palettes.find(({ id }) => id === selected);
 
-    return JSON.stringify(palette);
+    const label = isFavorite ? "remove from favorites" : "add to favorites";
+    const color = colors[colorId];
+    const formats = colorFormats(color);
+
+    return (
+      <div className={classes.selected}>
+        <div className={classes.selected__header}>
+          <button className="btn btn-red">{label}</button>
+          <button
+            className="btn btn-white"
+            onClick={() => redirectToGenerator(colors)}
+          >
+            open in generator
+          </button>
+        </div>
+
+        <div className={`${classes.selected__main} no-scrollbar`}>
+          {formats.map(({ label, value }, idx) => (
+            <div
+              key={idx}
+              className={classes.format}
+              style={{ background: color.value }}
+            >
+              <div className={classes.format__info}>
+                <span>{label}</span>
+                <span>{value}</span>
+              </div>
+
+              <button className="btn">click to copy</button>
+            </div>
+          ))}
+        </div>
+        <div className={classes.selected__footer}>
+          {colors.map((color, idx) => (
+            <div
+              style={{ background: color.value }}
+              className={[
+                classes.selected__colorbox,
+                idx === colorId && classes.active,
+              ].join(" ")}
+              onClick={() => setColorId(idx)}
+            ></div>
+          ))}
+        </div>
+      </div>
+    );
   };
 
   return (
