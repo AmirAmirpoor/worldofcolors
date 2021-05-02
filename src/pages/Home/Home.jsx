@@ -9,13 +9,13 @@ import { HeartIcon } from "../../helpers/icons";
 // chroma-js
 import chroma from "chroma-js";
 
-// colorFormats
+// colorFormats from helper.js
 import { colorFormats } from "../../helpers/colorFunctions";
 
 // styles
 import classes from "./Home.module.css";
 
-const Home = () => {
+const Home = ({ history }) => {
   const palettes = useSelector((state) => state.palettes);
   const [selected, setSelected] = useState(false);
   const [colorId, setColorId] = useState(0);
@@ -53,7 +53,7 @@ const Home = () => {
     const concatHexValues = colors.map(({ value }) => value.slice(1)).join("-");
     const link = `/generate?colors=${concatHexValues}`;
 
-    alert(link);
+    history.push(link);
   };
 
   const renderSelectedPalette = () => {

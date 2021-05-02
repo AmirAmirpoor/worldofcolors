@@ -18,3 +18,16 @@ export const colorFormats = ({ value: hex }) => {
 
   return details;
 };
+
+export const initialColors = (location) => {
+  // IT MEANS THAT WE CLICKED ON "OPEN IN GENERATOR" BUTTON
+  if (location.search.includes("colors")) {
+    return location.search
+      .split("?colors=")[1]
+      .split("-")
+      .map((color) => `#${color}`);
+  }
+
+  // IT MEANS THAT WE CLICKED ON "GENERATE" LINK
+  return Array.from({ length: 5 }).map((_) => chroma.random().hex());
+};
