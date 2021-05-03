@@ -1,7 +1,13 @@
 import { useState } from "react";
 
 // redux stuff
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  add_to_favorites,
+  remove_from_favorites,
+} from "../../store/actions/palettesActions";
+
+import { show_snackbar } from "../../store/actions/snackbarActions";
 
 // icons
 import { HeartIcon } from "../../helpers/icons";
@@ -17,11 +23,14 @@ import classes from "./Home.module.css";
 
 const Home = ({ history }) => {
   const palettes = useSelector((state) => state.palettes);
-  const [selected, setSelected] = useState(false);
+  const dispatch = useDispatch();
+
+  const [selected, setSelected] = useState(null);
   const [colorId, setColorId] = useState(0);
 
   const renderPalette = (palette) => {
     const { id, name, colors, isFavorite } = palette;
+
     return (
       <div key={id} className={classes.palette}>
         <div className={classes.palette__header}>
@@ -56,9 +65,21 @@ const Home = ({ history }) => {
     history.push(link);
   };
 
+  const toggleFavorite = (paletteId, isFavorite) => {
+    if (isFavorite) {
+      dispatch(remove_from_favorites(paletteId));
+      dispatch(show_snackbar("success", "REMOVED FROM FAVORITES"));
+    } else {
+      dispatch(add_to_favorites(paletteId));
+      dispatch(show_snackbar("success", "ADDED TO FAVORITES"));
+    }
+  };
+
   const renderSelectedPalette = () => {
     if (!selected) return null;
-    const { colors, isFavorite } = palettes.find(({ id }) => id === selected);
+    const { id, colors, isFavorite } = palettes.find(
+      (palette) => palette.id === selected
+    );
 
     const label = isFavorite ? "remove from favorites" : "add to favorites";
     const color = colors[colorId];
@@ -67,7 +88,12 @@ const Home = ({ history }) => {
     return (
       <div className={classes.selected}>
         <div className={classes.selected__header}>
-          <button className="btn btn-red">{label}</button>
+          <button
+            className="btn btn-red"
+            onClick={() => toggleFavorite(id, isFavorite)}
+          >
+            {label}
+          </button>
           <button
             className="btn btn-white"
             onClick={() => redirectToGenerator(colors)}
@@ -95,6 +121,7 @@ const Home = ({ history }) => {
         <div className={classes.selected__footer}>
           {colors.map((color, idx) => (
             <div
+              key={idx}
               style={{ background: color.value }}
               className={[
                 classes.selected__colorbox,
