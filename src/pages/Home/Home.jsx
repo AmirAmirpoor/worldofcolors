@@ -1,3 +1,4 @@
+// react imports
 import { useState } from "react";
 
 // redux stuff
@@ -20,6 +21,7 @@ import { colorFormats } from "../../helpers/colorFunctions";
 
 // styles
 import classes from "./Home.module.css";
+import MobilePanel from "../../components/MobilePanel/MobilePanel";
 
 const Home = ({ history }) => {
   const palettes = useSelector((state) => state.palettes);
@@ -27,6 +29,7 @@ const Home = ({ history }) => {
 
   const [selected, setSelected] = useState(null);
   const [colorId, setColorId] = useState(0);
+  const [showMpanel, setShowMpanel] = useState(false);
 
   const renderPalette = (palette) => {
     const { id, name, colors, isFavorite } = palette;
@@ -39,6 +42,7 @@ const Home = ({ history }) => {
             onClick={() => {
               setColorId(0);
               setSelected(id);
+              setShowMpanel(true);
             }}
           >
             {name}
@@ -75,11 +79,9 @@ const Home = ({ history }) => {
     }
   };
 
-  const renderSelectedPalette = () => {
-    if (!selected) return null;
-    const { id, colors, isFavorite } = palettes.find(
-      (palette) => palette.id === selected
-    );
+  const renderSelectedPalette = (palette) => {
+    if (!palette) return null;
+    const { id, colors, isFavorite } = palette;
 
     const label = isFavorite ? "remove from favorites" : "add to favorites";
     const color = colors[colorId];
@@ -135,6 +137,8 @@ const Home = ({ history }) => {
     );
   };
 
+  const selectedPalette = palettes.find((p) => p.id === selected);
+
   return (
     <div className="container">
       <div className="main">
@@ -142,7 +146,15 @@ const Home = ({ history }) => {
           {palettes.map((palette) => renderPalette(palette))}
         </div>
       </div>
-      <div className="aside">{renderSelectedPalette()}</div>
+      <div className="aside">{renderSelectedPalette(selectedPalette)}</div>
+
+      <MobilePanel
+        title={selectedPalette ? selectedPalette.name : ""}
+        visible={showMpanel}
+        onClose={() => setShowMpanel(false)}
+      >
+        PANEL CONTENT GOES HERE
+      </MobilePanel>
     </div>
   );
 };
