@@ -7,17 +7,21 @@ import {
   add_to_favorites,
   remove_from_favorites,
 } from "../../store/actions/palettesActions";
-
 import { show_snackbar } from "../../store/actions/snackbarActions";
 
 // icons
-import { HeartIcon } from "../../helpers/icons";
+import { LikeIcon, DeleteIcon, CopyIcon } from "../../helpers/icons";
 
 // chroma-js
 import chroma from "chroma-js";
 
 // colorFormats from helper.js
 import { colorFormats } from "../../helpers/colorFunctions";
+
+// components
+import RoundButton from "../../components/RoundButton/RoundButton.jsx";
+import SearchBox from "../../components/SearchBox/SearchBox.jsx";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 // styles
 import classes from "./Home.module.css";
@@ -49,7 +53,8 @@ const Home = ({ history }) => {
           </span>
 
           {isFavorite && (
-            <HeartIcon style={{ color: "crimson", fontSize: "1.25rem" }} />
+            // <HeartIcon style={{ color: "crimson", fontSize: "1.25rem" }} />
+            <small className={classes.favorite}>you liked this palette</small>
           )}
         </div>
         <div className={classes.palette__colors}>
@@ -87,17 +92,29 @@ const Home = ({ history }) => {
     const color = colors[colorId];
     const formats = colorFormats(color);
 
+    const textColor = chroma(color.value).luminance() < 0.3 ? "#eee" : "#333";
+
+    const concatColors = palette.colors
+      .map((color) => color.value.slice(1))
+      .join("-");
+    const generateLink = `/generate?colors=${concatColors}`;
     return (
       <div className={classes.selected}>
         <div className={classes.selected__header}>
-          <button
-            className="btn btn-red"
-            onClick={() => toggleFavorite(id, isFavorite)}
-          >
-            {label}
-          </button>
+          <RoundButton
+            icon={<LikeIcon style={{ transform: "translate(1px, -1px)" }} />}
+            title="like palette"
+          />
+
+          <RoundButton icon={<DeleteIcon />} title="delete palette" />
+
+          <CopyToClipboard text={generateLink}>
+            <RoundButton icon={<CopyIcon />} title="copy url" />
+          </CopyToClipboard>
+
           <button
             className="btn btn-white"
+            style={{ marginLeft: "auto" }}
             onClick={() => redirectToGenerator(colors)}
           >
             open in generator
@@ -105,32 +122,43 @@ const Home = ({ history }) => {
         </div>
 
         <div className={`${classes.selected__main} no-scrollbar`}>
-          {formats.map(({ label, value }, idx) => (
-            <div
-              key={idx}
-              className={classes.format}
-              style={{ background: color.value }}
-            >
-              <div className={classes.format__info}>
-                <span>{label}</span>
-                <span>{value}</span>
-              </div>
+          {formats.map(({ label, value }, idx) => {
+            return (
+              <div
+                key={idx}
+                className={classes.format}
+                style={{ background: color.value, color: textColor }}
+              >
+                <div className={classes.format__info}>
+                  <span>{label}</span>
+                  <span>{value}</span>
+                </div>
 
-              <button className="btn">click to copy</button>
-            </div>
-          ))}
+                <CopyToClipboard text={value}>
+                  <RoundButton
+                    icon={<CopyIcon style={{ color: textColor }} />}
+                  />
+                </CopyToClipboard>
+              </div>
+            );
+          })}
         </div>
         <div className={classes.selected__footer}>
           {colors.map((color, idx) => (
             <div
               key={idx}
               style={{ background: color.value }}
-              className={[
-                classes.selected__colorbox,
-                idx === colorId && classes.active,
-              ].join(" ")}
+              className={classes.selected__colorbox}
               onClick={() => setColorId(idx)}
-            ></div>
+            >
+              <div
+                className={[
+                  classes.selected__circle,
+                  idx === colorId && classes.active,
+                ].join(" ")}
+                style={{ background: textColor }}
+              ></div>
+            </div>
           ))}
         </div>
       </div>
@@ -142,8 +170,13 @@ const Home = ({ history }) => {
   return (
     <div className="container">
       <div className="main">
-        <div className={classes.palettes}>
-          {palettes.map((palette) => renderPalette(palette))}
+        <div className={[classes.content, "no-scrollbar"].join(" ")}>
+          <div className={classes.searchBox}>
+            <SearchBox />
+          </div>
+          <div className={classes.palettes}>
+            {palettes.map((palette) => renderPalette(palette))}
+          </div>
         </div>
       </div>
       <div className="aside">{renderSelectedPalette(selectedPalette)}</div>

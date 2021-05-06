@@ -6,6 +6,10 @@ import { IoMdHeart as HeartIcon } from "react-icons/io";
 import { IoIosColorFill as ColorIcon } from "react-icons/io";
 import { MdGradient as GradientIcon } from "react-icons/md";
 import { IoIosArrowForward as RightIcon } from "react-icons/io";
+import { AiFillDelete as DeleteIcon } from "react-icons/ai";
+import { AiFillLike as LikeIcon } from "react-icons/ai";
+import { RiFileCopyFill as CopyIcon } from "react-icons/ri";
+import { BsSearch as SearchIcon } from "react-icons/bs";
 
 export {
   CloseIcon,
@@ -16,4 +20,8 @@ export {
   ColorIcon,
   GradientIcon,
   RightIcon,
+  DeleteIcon,
+  LikeIcon,
+  CopyIcon,
+  SearchIcon,
 };

@@ -1,0 +1,36 @@
+.searchbox {
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  display: flex;
+  width: 100%;
+  padding: 0.35rem;
+  padding-left: 1rem;
+  max-width: 425px;
+  border-radius: 2rem;
+  position: relative;
+}
+
+.searchbox__input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  margin-right: 1rem;
+  caret-color: #aaa;
+}
+
+.searchbox__input::placeholder {
+  color: #aaa;
+}
+
+.searchbox__result {
+  position: absolute;
+  width: 100%;
+  top: calc(100% + 1rem);
+  left: 0;
+  box-shadow: inherit;
+  padding: 0.5rem;
+  background-color: #fff;
+  border-radius: 1.5rem;
+  max-height: 300px;
+  overflow-y: auto;
+}

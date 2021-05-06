@@ -1,0 +1,40 @@
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  flex: unset;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  color: #111;
+  position: relative;
+}
+
+.btn__tooltip {
+  position: absolute;
+  background-color: #222;
+  color: #fcfcfc;
+  font-weight: 100;
+  width: fit-content;
+  white-space: nowrap;
+  display: flex;
+  font-size: 0.75em;
+  padding: 0.1em 0.5em;
+  border-radius: 0.2em;
+  top: calc(100% + 0.25rem);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-0.1rem);
+  transition: all 100ms ease-in-out;
+}
+
+.btn:hover .btn__tooltip {
+  opacity: 1;
+  transform: translateY(0rem);
+  pointer-events: all;
+}
