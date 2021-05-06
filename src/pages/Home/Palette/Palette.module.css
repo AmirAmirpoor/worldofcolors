@@ -1,0 +1,29 @@
+.palette__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 0.25rem;
+}
+
+.palette__name {
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.palette__colors {
+  display: flex;
+  gap: 0.2em;
+  border-radius: 1rem;
+  height: 120px;
+}
+
+.palette__colors > div {
+  flex: 1;
+}
+
+.palette__liked {
+  font-size: 0.75em;
+  color: #bbb;
+  text-transform: uppercase;
+}
