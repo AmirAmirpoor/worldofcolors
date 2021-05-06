@@ -8,7 +8,6 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 200ms ease-in-out;
-  transition: opacity 200ms ease-in-out;
 }
 
 .panel__content {

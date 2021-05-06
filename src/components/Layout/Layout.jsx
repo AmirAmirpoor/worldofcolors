@@ -1,5 +1,10 @@
+import { useState, useEffect } from "react";
+
 // react-router-dom imports
 import { Link, NavLink } from "react-router-dom";
+
+// components
+import RoundButton from "../RoundButton/RoundButton";
 
 // icons
 import { HomeIcon } from "../../helpers/icons";
@@ -8,6 +13,8 @@ import { PaletteIcon } from "../../helpers/icons";
 import { HeartIcon } from "../../helpers/icons";
 import { ColorIcon } from "../../helpers/icons";
 import { GradientIcon } from "../../helpers/icons";
+import { MenuIcon } from "../../helpers/icons";
+import { CloseIcon } from "../../helpers/icons";
 
 // styles
 import classes from "./Layout.module.css";
@@ -22,8 +29,47 @@ const NAVBAR_ITEMS = [
 ];
 
 const Layout = ({ children }) => {
+  const [isNavbarVisible, setNavbarVisible] = useState(false);
+  const closeNavbar = () => setNavbarVisible(false);
+  const openNavbar = () => setNavbarVisible(true);
+
+  const handleNavbarClick = (e) => {
+    const name = e.target.getAttribute("name");
+    if (name === "m_navbar") closeNavbar();
+  };
+
+  useEffect(() => {
+    if (isNavbarVisible) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "auto";
+  }, [isNavbarVisible]);
+
   return (
     <div className={classes.layout}>
+      {/* MOBILE HEADER and SIDEBAR */}
+      <header className={classes.mobile__header}>
+        <Link to="/" className={classes.navbar__logo}>
+          <h1>COLORS</h1>
+        </Link>
+
+        <RoundButton icon={<MenuIcon />} onClick={openNavbar} />
+        <div
+          className={`${classes.mobile__navbar} ${
+            isNavbarVisible && classes.visible
+          }`}
+          name="m_navbar"
+          onClick={handleNavbarClick}
+        >
+          <nav className={classes.mobile__nav}>
+            <RoundButton icon={<CloseIcon />} onClick={closeNavbar} />
+            LOGO
+            <br />
+            LINKS
+            <br />
+            FOOTER
+          </nav>
+        </div>
+      </header>
+
       <div className={classes.layout__navbar}>
         <Link to="/" className={classes.navbar__logo}>
           <h1>COLORS</h1>
