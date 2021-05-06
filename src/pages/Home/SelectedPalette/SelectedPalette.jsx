@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 // redux stuff
 import { useSelector, useDispatch } from "react-redux";
 import { select_color } from "../../../store/actions/selectedPaletteActions";
@@ -20,6 +22,35 @@ import { useHistory } from "react-router-dom";
 
 // styles
 import classes from "./SelectedPalette.module.css";
+
+// FORMAT COMPONENT
+const Format = ({ value, label, color, background }) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopied = () => {
+    setCopied(true);
+    setTimeout(() => {
+      setCopied(false);
+    }, 1000);
+  };
+
+  return (
+    <div className={classes.format} style={{ background, color }}>
+      <div className={classes.format__info}>
+        <span>{label}</span>
+        <span>{value}</span>
+      </div>
+
+      {copied ? (
+        <span>COPIED</span>
+      ) : (
+        <CopyToClipboard text={value} onCopy={handleCopied}>
+          <RoundButton icon={<CopyIcon style={{ color }} />} />
+        </CopyToClipboard>
+      )}
+    </div>
+  );
+};
 
 const SelectedPalette = () => {
   const { palette, colorIndex } = useSelector((state) => state.selectedPalette);
@@ -71,22 +102,15 @@ const SelectedPalette = () => {
       </div>
 
       <div className={`${classes.selected__main} no-scrollbar`}>
-        {formats.map(({ label, value }, idx) => {
+        {formats.map((format, idx) => {
           return (
-            <div
+            <Format
               key={idx}
-              className={classes.format}
-              style={{ background: color.value, color: textColor }}
-            >
-              <div className={classes.format__info}>
-                <span>{label}</span>
-                <span>{value}</span>
-              </div>
-
-              <CopyToClipboard text={value}>
-                <RoundButton icon={<CopyIcon style={{ color: textColor }} />} />
-              </CopyToClipboard>
-            </div>
+              label={format.label}
+              value={format.value}
+              background={color.value}
+              color={textColor}
+            />
           );
         })}
       </div>
