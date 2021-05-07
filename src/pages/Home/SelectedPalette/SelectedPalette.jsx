@@ -2,7 +2,12 @@ import { useState } from "react";
 
 // redux stuff
 import { useSelector, useDispatch } from "react-redux";
+import {
+  like_palette,
+  remove_from_liked_palettes,
+} from "../../../store/actions/palettesActions";
 import { select_color } from "../../../store/actions/selectedPaletteActions";
+import { show_snackbar } from "../../../store/actions/snackbarActions";
 
 // components
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -12,7 +17,10 @@ import RoundButton from "../../../components/RoundButton/RoundButton.jsx";
 import chroma from "chroma-js";
 
 // icons
-import { LikeIcon, DeleteIcon, CopyIcon } from "../../../helpers/icons";
+import { LikeIcon } from "../../../helpers/icons";
+import { OutlineLikeIcon } from "../../../helpers/icons";
+import { DeleteIcon } from "../../../helpers/icons";
+import { CopyIcon } from "../../../helpers/icons";
 
 // color functions
 import { colorFormats } from "../../../helpers/colorFunctions";
@@ -66,6 +74,20 @@ const SelectedPalette = () => {
     history.push(link);
   };
 
+  const alertURLCopied = () => {
+    dispatch(show_snackbar("success", "url copied"));
+  };
+
+  const likePalette = () => {
+    dispatch(like_palette(palette.id));
+    dispatch(show_snackbar("success", "added to liked palettes"));
+  };
+
+  const removeFromLikedPalettes = () => {
+    dispatch(remove_from_liked_palettes(palette.id));
+    dispatch(show_snackbar("success", "removed from liked palettes"));
+  };
+
   if (!palette) return null;
   const { colors, isFavorite } = palette;
 
@@ -74,21 +96,31 @@ const SelectedPalette = () => {
 
   const textColor = chroma(color.value).luminance() < 0.3 ? "#eee" : "#333";
 
-  const concatColors = palette.colors
-    .map((color) => color.value.slice(1))
-    .join("-");
-  const generateLink = `/generate?colors=${concatColors}`;
+  // GENERATE_URL TO COPY
+  const concatColors = colors.map((color) => color.value.slice(1)).join("-");
+  const generateLink = `${window.location.host}/generate?colors=${concatColors}`;
   return (
     <div className={classes.selected}>
       <div className={classes.selected__header}>
-        <RoundButton
-          icon={<LikeIcon style={{ transform: "translate(1px, -1px)" }} />}
-          title="like palette"
-        />
+        {isFavorite ? (
+          <RoundButton
+            icon={<LikeIcon style={{ transform: "translate(1px, -1px)" }} />}
+            title="remove from liked palettes"
+            onClick={removeFromLikedPalettes}
+          />
+        ) : (
+          <RoundButton
+            icon={
+              <OutlineLikeIcon style={{ transform: "translate(1px, -1px)" }} />
+            }
+            title="like palette"
+            onClick={likePalette}
+          />
+        )}
 
         <RoundButton icon={<DeleteIcon />} title="delete palette" />
 
-        <CopyToClipboard text={generateLink}>
+        <CopyToClipboard text={generateLink} onCopy={alertURLCopied}>
           <RoundButton icon={<CopyIcon />} title="copy url" />
         </CopyToClipboard>
 

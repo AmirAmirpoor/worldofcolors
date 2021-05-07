@@ -38,3 +38,7 @@
   transform: translateY(0rem);
   pointer-events: all;
 }
+
+.btn.hide__tooltip .btn__tooltip {
+  display: none;
+}

@@ -1,8 +1,8 @@
 export const SET_PALETTES = "SET_PALETTES";
 export const ADD_TO_PALETTES = "ADD_TO_PALETTES";
 export const REMOVE_FROM_PALETTES = "REMOVE_FROM_PALETTES";
-export const ADD_TO_FAVORITES = "ADD_TO_FAVORITES";
-export const REMOVE_FROM_FAVORITES = "REMOVE_FROM_FAVORITES";
+export const LIKE_PALETTE = "LIKE_PALETTE";
+export const REMOVE_FROM_LIKED_PALETTES = "REMOVE_FROM_LIKED_PALETTES";
 
 export const set_palettes = (palettes) => {
   return {
@@ -27,16 +27,16 @@ export const remove_from_palettes = (id) => {
   };
 };
 
-export const add_to_favorites = (id) => {
+export const like_palette = (id) => {
   return {
-    type: ADD_TO_FAVORITES,
+    type: LIKE_PALETTE,
     payload: { paletteId: id },
   };
 };
 
-export const remove_from_favorites = (id) => {
+export const remove_from_liked_palettes = (id) => {
   return {
-    type: REMOVE_FROM_FAVORITES,
+    type: REMOVE_FROM_LIKED_PALETTES,
     payload: { paletteId: id },
   };
 };

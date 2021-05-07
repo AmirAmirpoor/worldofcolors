@@ -2,8 +2,8 @@ import {
   SET_PALETTES,
   ADD_TO_PALETTES,
   REMOVE_FROM_PALETTES,
-  ADD_TO_FAVORITES,
-  REMOVE_FROM_FAVORITES,
+  LIKE_PALETTE,
+  REMOVE_FROM_LIKED_PALETTES,
 } from "../actions/palettesActions";
 
 import { PALETTES } from "../../helpers/constants";
@@ -21,12 +21,12 @@ export const palettesReducer = (state = PALETTES, action) => {
     case REMOVE_FROM_PALETTES:
       return state.filter((palette) => palette.id !== action.payload.paletteId);
 
-    case ADD_TO_FAVORITES:
+    case LIKE_PALETTE:
       return state.map((p) =>
         p.id === action.payload.paletteId ? { ...p, isFavorite: true } : p
       );
 
-    case REMOVE_FROM_FAVORITES:
+    case REMOVE_FROM_LIKED_PALETTES:
       return state.map((p) =>
         p.id === action.payload.paletteId ? { ...p, isFavorite: false } : p
       );
