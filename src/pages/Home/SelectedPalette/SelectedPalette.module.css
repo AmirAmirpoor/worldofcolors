@@ -69,3 +69,40 @@
 .selected__circle.active {
   transform: translate(-50%, -50%) scale(1);
 }
+
+/* Styles for mobile screen:  */
+/* this component will appear in MobilePanel component on mobile */
+
+@media screen and (max-width: 500px) {
+  .selected {
+    padding: 0;
+  }
+
+  /* SELECTED HEADER */
+  .selected__header {
+    padding: 0.5em 0.75em;
+  }
+
+  .selected__main {
+    gap: 0;
+  }
+
+  .format {
+    font-size: 0.85em;
+    border-radius: 0;
+  }
+
+  .format button {
+    opacity: 1;
+  }
+
+  /* SELECTED FOOTER */
+  .selected__footer {
+    padding: 0;
+    gap: 0;
+  }
+
+  .selected__colorbox {
+    border-radius: 0;
+  }
+}

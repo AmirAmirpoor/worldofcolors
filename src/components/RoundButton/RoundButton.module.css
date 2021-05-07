@@ -42,3 +42,9 @@
 .btn.hide__tooltip .btn__tooltip {
   display: none;
 }
+
+@media screen and (max-width: 500px) {
+  .btn__tooltip {
+    display: none;
+  }
+}

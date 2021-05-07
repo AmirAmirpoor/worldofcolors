@@ -23,6 +23,7 @@
   background-color: #fff;
   transform: translateY(120%);
   transition: transform 100ms ease-in-out;
+  overflow-y: auto;
 }
 
 .panel__topbar {
@@ -49,6 +50,7 @@
 
 .panel__children {
   flex: 1;
+  overflow-y: auto;
 }
 
 .panel.visible {

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 // redux stuff
 import { useSelector, useDispatch } from "react-redux";
 import { close_panel } from "../../store/actions/mobilePanelActions.js";
@@ -19,6 +21,11 @@ const Home = () => {
   const visible = useSelector((state) => state.mobilePanel);
 
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (visible) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "auto";
+  }, [visible]);
 
   return (
     <div className="container">
@@ -44,7 +51,7 @@ const Home = () => {
         visible={visible}
         onClose={() => dispatch(close_panel())}
       >
-        PANEL CONTENT GOES HERE
+        <SelectedPalette />
       </MobilePanel>
     </div>
   );
