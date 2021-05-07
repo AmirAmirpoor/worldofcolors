@@ -1,0 +1,73 @@
+.confirm {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--overlay-background-color);
+  z-index: var(--ultra-z-index);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 1em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease-in-out;
+}
+
+.confirm__content {
+  background-color: #fff;
+  width: 100%;
+  max-width: 500px;
+  padding: 1em;
+  box-shadow: var(--light-shadow);
+  border-radius: 1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  transform: translateY(-120%);
+  transition: transform 100ms ease-in-out;
+}
+
+.confirm__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 0.5em;
+}
+
+.confirm__actions > button {
+  min-width: 100px;
+}
+
+.cancel__btn {
+  margin-right: 1em;
+  opacity: 0.65;
+}
+
+.confirm.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.confirm.visible .confirm__content {
+  transform: translateY(0);
+  transition: transform 100ms ease-in-out 100ms;
+}
+
+.confirm.delete {
+  color: var(--error-color);
+}
+
+.confirm.delete .confirm__btn {
+  background-color: var(--error-color);
+  color: #fff;
+}
+
+.confirm.create {
+  color: var(--succcess-color);
+}
+
+.confirm.create .confirm__btn {
+  background-color: var(--succcess-color);
+  color: #fff;
+}

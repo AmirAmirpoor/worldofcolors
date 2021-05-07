@@ -8,6 +8,7 @@ import Generate from "./pages/Generate/Generate.jsx";
 // components
 import Layout from "./components/Layout/Layout.jsx";
 import Snackbar from "./components/Snackbar/Snackbar.jsx";
+import Confirm from "./components/Confirm/Confirm.jsx";
 import FullScreen from "./components/FullScreen/FullScreen.jsx";
 
 // styles
@@ -25,6 +26,7 @@ function App() {
       </Layout>
 
       <Snackbar />
+      <Confirm />
       <FullScreen />
     </div>
   );

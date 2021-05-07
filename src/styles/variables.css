@@ -3,6 +3,8 @@
   --light-gray: #f2f5fa;
   --text-color: #444;
   --overlay-background-color: rgba(0, 0, 0, 0.2);
+  --error-color: rgba(220, 20, 60, 0.747);
+  --succcess-color: rgb(97, 163, 126);
 
   /* BOX-SHADOW VARIABLES */
   --light-bottom-shadow: 0 1px 6px -2px rgba(0, 0, 0, 0.25);

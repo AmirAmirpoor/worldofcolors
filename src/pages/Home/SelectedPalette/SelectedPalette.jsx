@@ -3,11 +3,13 @@ import { useState } from "react";
 // redux stuff
 import { useSelector, useDispatch } from "react-redux";
 import {
+  remove_from_palettes,
   like_palette,
   remove_from_liked_palettes,
 } from "../../../store/actions/palettesActions";
 import { select_color } from "../../../store/actions/selectedPaletteActions";
 import { show_snackbar } from "../../../store/actions/snackbarActions";
+import { show_confirm } from "../../../store/actions/confirmActions";
 
 // components
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -88,6 +90,15 @@ const SelectedPalette = () => {
     dispatch(show_snackbar("success", "removed from liked palettes"));
   };
 
+  const openDeletePaletteConfirm = () => {
+    dispatch(show_confirm("delete", "Delete palette ?", deletePalette));
+  };
+
+  const deletePalette = () => {
+    dispatch(remove_from_palettes(palette.id));
+    dispatch(show_snackbar("success", "palette deleted"));
+  };
+
   if (!palette) return null;
   const { colors, isFavorite } = palette;
 
@@ -118,7 +129,11 @@ const SelectedPalette = () => {
           />
         )}
 
-        <RoundButton icon={<DeleteIcon />} title="delete palette" />
+        <RoundButton
+          icon={<DeleteIcon />}
+          title="delete palette"
+          onClick={openDeletePaletteConfirm}
+        />
 
         <CopyToClipboard text={generateLink} onCopy={alertURLCopied}>
           <RoundButton icon={<CopyIcon />} title="copy url" />
