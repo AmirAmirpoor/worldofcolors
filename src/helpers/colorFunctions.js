@@ -25,9 +25,15 @@ export const initialColors = (location) => {
     return location.search
       .split("?colors=")[1]
       .split("-")
-      .map((color) => `#${color}`);
+      .map((value, idx) => ({
+        id: idx,
+        value: `#${value}`,
+      }));
   }
 
   // IT MEANS THAT WE CLICKED ON "GENERATE" LINK
-  return Array.from({ length: 5 }).map((_) => chroma.random().hex());
+  return Array.from({ length: 5 }).map((_, idx) => ({
+    id: idx,
+    value: chroma.random().hex(),
+  }));
 };

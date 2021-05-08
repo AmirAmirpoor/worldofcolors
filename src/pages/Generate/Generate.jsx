@@ -1,26 +1,14 @@
-// react imports
-import { useState } from "react";
+// components
+import Colors from "./Colors/Colors.jsx";
 
-// initialColors from helper.js
-import { initialColors } from "../../helpers/colorFunctions";
+// styles
+import classes from "./Generate.module.css";
 
-const Generate = ({ location }) => {
-  const [colors, setColors] = useState(initialColors(location));
-
+const Generate = () => {
   return (
     <div className="container">
       <div className="main">
-        {colors.map((color, idx) => (
-          <div
-            key={idx}
-            style={{
-              width: 100,
-              height: 100,
-              background: color,
-              display: "inline-block",
-            }}
-          ></div>
-        ))}
+        <Colors />
       </div>
       <div className="aside">ASIDE</div>
     </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 // react-router-dom imports
 import { Link, NavLink } from "react-router-dom";
@@ -16,6 +16,9 @@ import { GradientIcon } from "../../helpers/icons";
 import { MenuIcon } from "../../helpers/icons";
 import { CloseIcon } from "../../helpers/icons";
 
+// react-router-dom
+import { useLocation } from "react-router-dom";
+
 // styles
 import classes from "./Layout.module.css";
 
@@ -30,6 +33,7 @@ const NAVBAR_ITEMS = [
 
 const Layout = ({ children }) => {
   const [isNavbarVisible, setNavbarVisible] = useState(false);
+  const headerRef = useRef();
   const closeNavbar = () => setNavbarVisible(false);
   const openNavbar = () => setNavbarVisible(true);
 
@@ -42,6 +46,14 @@ const Layout = ({ children }) => {
     if (isNavbarVisible) document.body.style.overflow = "hidden";
     else document.body.style.overflow = "auto";
   }, [isNavbarVisible]);
+
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const noMarginBottoms = ["/generate"];
+    const applyMargin = !noMarginBottoms.includes(pathname);
+    if (applyMargin) headerRef.current.style.marginBottom = "1.5em";
+    else headerRef.current.style.marginBottom = 0;
+  }, [pathname]);
 
   const navbarContent = () => {
     return (
@@ -78,7 +90,7 @@ const Layout = ({ children }) => {
       <div className={classes.layout__navbar}>{navbarContent()}</div>
 
       {/* MOBILE HEADER and SIDEBAR */}
-      <header className={classes.mobile__header}>
+      <header className={classes.mobile__header} ref={headerRef}>
         <Link to="/" className={classes.navbar__logo}>
           <h1>COLORS</h1>
         </Link>

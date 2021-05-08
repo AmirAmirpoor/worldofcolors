@@ -1,5 +1,5 @@
 .searchbox {
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--light-shadow);
   display: flex;
   width: 100%;
   padding: 0.35rem;
