@@ -32,8 +32,8 @@ const Colors = () => {
 
   return (
     <div className={classes.colors}>
-      {colors.map((color) => (
-        <Color key={color.id} index={color.id} color={color} />
+      {colors.map((color, index) => (
+        <Color key={color.id} index={index} color={color} />
       ))}
     </div>
   );

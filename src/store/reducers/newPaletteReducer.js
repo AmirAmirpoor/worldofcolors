@@ -1,13 +1,8 @@
-import { SET_COLORS } from "../actions/newPaletteActions";
+import { SET_COLORS, REORDER_COLORS } from "../actions/newPaletteActions";
 
 const initialPalette = {
   name: "",
-  colors: [
-    { id: 0, value: "#5a189a" },
-    { id: 1, value: "#7b2cbf" },
-    { id: 2, value: "#9d4edd" },
-    { id: 3, value: "#c77dff" },
-  ],
+  colors: [],
   isFavorite: false,
 };
 
@@ -18,6 +13,17 @@ export const newPaletteReducer = (state = initialPalette, action) => {
         ...state,
         colors: action.payload.colors,
       };
+
+    case REORDER_COLORS:
+      const updatedColors = [...state.colors];
+      const movedColor = updatedColors.splice(action.payload.oldIndex, 1)[0];
+      updatedColors.splice(action.payload.newIndex, 0, movedColor);
+
+      return {
+        ...state,
+        colors: updatedColors,
+      };
+
     default:
       return state;
   }
