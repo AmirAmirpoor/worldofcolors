@@ -12,6 +12,7 @@ import { AiOutlineLike as OutlineLikeIcon } from "react-icons/ai";
 import { RiFileCopyFill as CopyIcon } from "react-icons/ri";
 import { BsSearch as SearchIcon } from "react-icons/bs";
 import { CgMenuLeft as MenuIcon } from "react-icons/cg";
+import { BiMoveVertical as MoveIcon } from "react-icons/bi";
 
 export {
   CloseIcon,
@@ -28,4 +29,5 @@ export {
   CopyIcon,
   SearchIcon,
   MenuIcon,
+  MoveIcon,
 };

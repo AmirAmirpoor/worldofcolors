@@ -3,15 +3,18 @@ import { useEffect } from "react";
 // components
 import Color from "../Color/Color.jsx";
 
-// react-sortable-hoc
-import { SortableContainer } from "react-sortable-hoc";
-
 // redux stuff
 import { useSelector, useDispatch } from "react-redux";
-import { set_colors } from "../../../store/actions/newPaletteActions";
+import {
+  set_colors,
+  reorder_colors,
+} from "../../../store/actions/newPaletteActions";
 
 // react-router-dom
 import { useLocation } from "react-router-dom";
+
+// react-smooth-dnd
+import { Container } from "react-smooth-dnd";
 
 // color functions
 import { initialColors } from "../../../helpers/colorFunctions.js";
@@ -20,6 +23,7 @@ import { initialColors } from "../../../helpers/colorFunctions.js";
 import classes from "./Colors.module.css";
 
 const Colors = () => {
+  const { colors } = useSelector((state) => state.newPalette);
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -28,15 +32,27 @@ const Colors = () => {
     dispatch(set_colors(colors));
   }, []);
 
-  const { colors } = useSelector((state) => state.newPalette);
+  const reorder = ({ removedIndex, addedIndex }) => {
+    dispatch(reorder_colors(removedIndex, addedIndex));
+  };
+
+  const containerStyles = {
+    display: "flex",
+    flexDirection: "column",
+    height: "100%",
+  };
 
   return (
-    <div className={classes.colors}>
+    <Container
+      style={containerStyles}
+      dragHandleSelector=".drag"
+      onDrop={reorder}
+    >
       {colors.map((color, index) => (
         <Color key={color.id} index={index} color={color} />
       ))}
-    </div>
+    </Container>
   );
 };
 
-export default SortableContainer(Colors);
+export default Colors;

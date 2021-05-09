@@ -1,15 +1,25 @@
-// react-sortable-hoc
-import { SortableElement } from "react-sortable-hoc";
+// react-smooth-dnd
+import { Draggable } from "react-smooth-dnd";
+
+// icons
+import { MoveIcon } from "../../../helpers/icons";
 
 // styles
 import classes from "./Color.module.css";
 
 const Color = ({ color }) => {
+  const style = {
+    background: color.value,
+    flex: 1,
+  };
+
   return (
-    <div className={classes.color} style={{ background: color.value }}>
-      <h3>{color.value}</h3>
-    </div>
+    <Draggable style={style}>
+      <button className={`${classes.drag__handle} drag`}>
+        <MoveIcon />
+      </button>
+    </Draggable>
   );
 };
 
-export default SortableElement(Color);
+export default Color;
