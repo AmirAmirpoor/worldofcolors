@@ -1,5 +1,5 @@
 // redux stuff
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { delete_color } from "../../../store/actions/newPaletteActions";
 import { show_snackbar } from "../../../store/actions/snackbarActions";
 
@@ -26,10 +26,10 @@ import { OutlineLikeIcon } from "../../../helpers/icons";
 import classes from "./Color.module.css";
 
 const Color = ({ color }) => {
+  const { colors } = useSelector((state) => state.newPalette);
   const dispatch = useDispatch();
 
   const textColor = chroma(color.value).luminance() < 0.3 ? "#eee" : "#333";
-
   const style = {
     background: color.value,
     flex: 1,
@@ -43,6 +43,8 @@ const Color = ({ color }) => {
 
   const alertCopied = () => dispatch(show_snackbar("success", "color copied"));
 
+  const showDeleteBtn = colors.length > 2;
+
   return (
     <Draggable style={style}>
       <div className={classes.color}>
@@ -55,9 +57,13 @@ const Color = ({ color }) => {
           <button className={classes.color__like}>
             <OutlineLikeIcon />
           </button>
-          <button className={classes.color__delete} onClick={deleteColor}>
-            <CloseIcon />
-          </button>
+
+          {showDeleteBtn && (
+            <button className={classes.color__delete} onClick={deleteColor}>
+              <CloseIcon />
+            </button>
+          )}
+
           <button className={`${classes.color__move} drag`}>
             <MoveIcon />
           </button>
