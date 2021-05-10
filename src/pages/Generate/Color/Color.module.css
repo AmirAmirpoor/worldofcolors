@@ -65,14 +65,20 @@
   font-size: 1.25em;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 768px) {
   .color {
-    font-size: 0.85em;
+    font-size: 0.9em;
   }
 
   .color__shades,
   .color__like,
   .color__copy {
     display: none;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .color {
+    font-size: 0.85em;
   }
 }
