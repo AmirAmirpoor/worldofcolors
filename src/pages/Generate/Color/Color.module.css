@@ -1,19 +1,78 @@
-.drag__handle {
-  /* STYLES ARE JUST FOR TEST */
-  width: 2.5rem;
-  height: 2.5rem;
-  font-size: 1.25rem;
-  background-color: rgba(100, 100, 100, 0.15);
+.color {
+  height: 100%;
+  margin: 0;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1em;
+  padding: 0 2em;
+}
+
+.color__info {
+  text-align: center;
+}
+
+.color__options {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
+.color__secondary {
+  font-size: 0.8em;
+  opacity: 0.65;
+  font-weight: 400;
+}
+
+.color__hex {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+
+.color__like,
+.color__delete,
+.color__move,
+.color__copy,
+.color__lock,
+.color__shades {
+  width: 2em;
+  height: 2em;
+  font-size: 1.2em;
+  display: flex;
+  background-color: transparent;
   justify-content: center;
   align-items: center;
   border: none;
   outline: none;
   border-radius: 50%;
-  cursor: grab;
-  margin: 0.25rem;
+  cursor: pointer;
 }
 
-.drag__handle:active {
+.color__move {
+  cursor: grab;
+}
+
+.color__move:active {
   cursor: grabbing;
+}
+
+.color__lock {
+  font-size: 1.1em;
+}
+
+.color__shades {
+  font-size: 1.25em;
+}
+
+@media screen and (max-width: 500px) {
+  .color {
+    font-size: 0.85em;
+  }
+
+  .color__shades,
+  .color__like,
+  .color__copy {
+    display: none;
+  }
 }
