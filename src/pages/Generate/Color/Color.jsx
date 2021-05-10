@@ -3,8 +3,14 @@ import { useDispatch } from "react-redux";
 import { delete_color } from "../../../store/actions/newPaletteActions";
 import { show_snackbar } from "../../../store/actions/snackbarActions";
 
+// chroma
+import chroma from "chroma-js";
+
 // react-smooth-dnd
 import { Draggable } from "react-smooth-dnd";
+
+// react-copy-to-clipboard
+import CopyToClipboard from "react-copy-to-clipboard";
 
 // icons
 import { MoveIcon } from "../../../helpers/icons";
@@ -22,15 +28,20 @@ import classes from "./Color.module.css";
 const Color = ({ color }) => {
   const dispatch = useDispatch();
 
+  const textColor = chroma(color.value).luminance() < 0.3 ? "#eee" : "#333";
+
   const style = {
     background: color.value,
     flex: 1,
+    color: textColor,
   };
 
   const deleteColor = () => {
     dispatch(delete_color(color.id));
     dispatch(show_snackbar("success", "color deleted"));
   };
+
+  const alertCopied = () => dispatch(show_snackbar("success", "color copied"));
 
   return (
     <Draggable style={style}>
@@ -50,9 +61,13 @@ const Color = ({ color }) => {
           <button className={`${classes.color__move} drag`}>
             <MoveIcon />
           </button>
-          <button className={classes.color__copy}>
-            <CopyIcon />
-          </button>
+
+          <CopyToClipboard text={color.value} onCopy={alertCopied}>
+            <button className={classes.color__copy}>
+              <CopyIcon />
+            </button>
+          </CopyToClipboard>
+
           <button className={classes.color__lock}>
             <LockIcon />
           </button>
