@@ -20,3 +20,10 @@ export const reorder_colors = (oldIndex, newIndex) => {
     },
   };
 };
+
+export const delete_color = (colorId) => {
+  return {
+    type: DELETE_COLOR,
+    payload: { colorId },
+  };
+};

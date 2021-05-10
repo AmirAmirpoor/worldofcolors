@@ -1,4 +1,8 @@
-import { SET_COLORS, REORDER_COLORS } from "../actions/newPaletteActions";
+import {
+  SET_COLORS,
+  REORDER_COLORS,
+  DELETE_COLOR,
+} from "../actions/newPaletteActions";
 
 const initialPalette = {
   name: "",
@@ -22,6 +26,14 @@ export const newPaletteReducer = (state = initialPalette, action) => {
       return {
         ...state,
         colors: updatedColors,
+      };
+
+    case DELETE_COLOR:
+      return {
+        ...state,
+        colors: state.colors.filter(
+          (color) => color.id !== action.payload.colorId
+        ),
       };
 
     default:

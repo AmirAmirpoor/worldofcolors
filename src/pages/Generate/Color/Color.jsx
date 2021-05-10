@@ -1,3 +1,8 @@
+// redux stuff
+import { useDispatch } from "react-redux";
+import { delete_color } from "../../../store/actions/newPaletteActions";
+import { show_snackbar } from "../../../store/actions/snackbarActions";
+
 // react-smooth-dnd
 import { Draggable } from "react-smooth-dnd";
 
@@ -15,9 +20,16 @@ import { OutlineLikeIcon } from "../../../helpers/icons";
 import classes from "./Color.module.css";
 
 const Color = ({ color }) => {
+  const dispatch = useDispatch();
+
   const style = {
     background: color.value,
     flex: 1,
+  };
+
+  const deleteColor = () => {
+    dispatch(delete_color(color.id));
+    dispatch(show_snackbar("success", "color deleted"));
   };
 
   return (
@@ -32,7 +44,7 @@ const Color = ({ color }) => {
           <button className={classes.color__like}>
             <OutlineLikeIcon />
           </button>
-          <button className={classes.color__delete}>
+          <button className={classes.color__delete} onClick={deleteColor}>
             <CloseIcon />
           </button>
           <button className={`${classes.color__move} drag`}>
