@@ -1,13 +1,17 @@
+import { sample } from "lodash";
 import {
   SET_COLORS,
   REORDER_COLORS,
   DELETE_COLOR,
+  UPDATE_COLOR,
+  SET_VISIBLE_SHADES,
 } from "../actions/newPaletteActions";
 
 const initialPalette = {
   name: "",
   colors: [],
   isFavorite: false,
+  visibleShades: null,
 };
 
 export const newPaletteReducer = (state = initialPalette, action) => {
@@ -34,6 +38,23 @@ export const newPaletteReducer = (state = initialPalette, action) => {
         colors: state.colors.filter(
           (color) => color.id !== action.payload.colorId
         ),
+      };
+
+    case UPDATE_COLOR:
+      return {
+        ...state,
+        visibleShades: null,
+        colors: state.colors.map((c, idx) => {
+          return idx === action.payload.index
+            ? { ...c, value: action.payload.value }
+            : c;
+        }),
+      };
+
+    case SET_VISIBLE_SHADES:
+      return {
+        ...state,
+        visibleShades: action.payload.color,
       };
 
     default:
