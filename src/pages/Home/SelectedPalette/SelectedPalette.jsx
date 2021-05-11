@@ -15,9 +15,6 @@ import { show_confirm } from "../../../store/actions/confirmActions";
 import CopyToClipboard from "react-copy-to-clipboard";
 import RoundButton from "../../../components/RoundButton/RoundButton.jsx";
 
-// chroma
-import chroma from "chroma-js";
-
 // icons
 import { LikeIcon } from "../../../helpers/icons";
 import { OutlineLikeIcon } from "../../../helpers/icons";
@@ -25,7 +22,7 @@ import { DeleteIcon } from "../../../helpers/icons";
 import { CopyIcon } from "../../../helpers/icons";
 
 // color functions
-import { colorFormats } from "../../../helpers/colorFunctions";
+import { colorFormats, darkOrLight } from "../../../helpers/colorFunctions";
 
 // react router dom
 import { useHistory } from "react-router-dom";
@@ -105,7 +102,7 @@ const SelectedPalette = () => {
   const color = colors[colorIndex];
   const formats = colorFormats(color);
 
-  const textColor = chroma(color.value).luminance() < 0.3 ? "#eee" : "#333";
+  const textColor = darkOrLight(color);
 
   // GENERATE_URL TO COPY
   const concatColors = colors.map((color) => color.value.slice(1)).join("-");

@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { delete_color } from "../../../store/actions/newPaletteActions";
 import { show_snackbar } from "../../../store/actions/snackbarActions";
 
-// chroma
-import chroma from "chroma-js";
+// color functions
+import { darkOrLight } from "../../../helpers/colorFunctions";
 
 // react-smooth-dnd
 import { Draggable } from "react-smooth-dnd";
@@ -29,7 +29,8 @@ const Color = ({ color }) => {
   const { colors } = useSelector((state) => state.newPalette);
   const dispatch = useDispatch();
 
-  const textColor = chroma(color.value).luminance() < 0.3 ? "#eee" : "#333";
+  const textColor = darkOrLight(color);
+
   const style = {
     background: color.value,
     flex: 1,

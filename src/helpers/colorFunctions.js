@@ -37,3 +37,8 @@ export const initialColors = (location) => {
     value: chroma.random().hex(),
   }));
 };
+
+export const darkOrLight = ({ value: hex }) => {
+  const luminance = chroma(hex).luminance();
+  return luminance < 0.3 ? "#eee" : "#333";
+};
