@@ -13,8 +13,10 @@ import { RiFileCopyFill as CopyIcon } from "react-icons/ri";
 import { BsSearch as SearchIcon } from "react-icons/bs";
 import { CgMenuLeft as MenuIcon } from "react-icons/cg";
 import { BiMoveVertical as MoveIcon } from "react-icons/bi";
-import { FaLock as LockIcon } from "react-icons/fa";
-import { FaUnlock as UnlockIcon } from "react-icons/fa";
+// import { FaLock as LockIcon } from "react-icons/fa";
+// import { FaUnlock as UnlockIcon } from "react-icons/fa";
+import { HiLockOpen as LockIcon } from "react-icons/hi";
+import { HiLockClosed as UnlockIcon } from "react-icons/hi";
 import { HiViewGrid as GridIcon } from "react-icons/hi";
 
 export {

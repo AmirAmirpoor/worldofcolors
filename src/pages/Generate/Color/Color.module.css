@@ -59,10 +59,7 @@
   cursor: grabbing;
 }
 
-.color__lock {
-  font-size: 1.1em;
-}
-
+.color__lock,
 .color__shades {
   font-size: 1.25em;
 }

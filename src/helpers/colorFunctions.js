@@ -32,6 +32,7 @@ export const initialColors = (location) => {
       .map((value, idx) => ({
         id: idx,
         value: `#${value}`,
+        isLocked: false,
       }));
   }
 
@@ -39,6 +40,7 @@ export const initialColors = (location) => {
   return Array.from({ length: 5 }).map((_, idx) => ({
     id: idx,
     value: chroma.random().hex(),
+    isLocked: false,
   }));
 };
 

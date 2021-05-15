@@ -4,6 +4,7 @@ export const ADD_COLOR = "ADD_COLOR";
 export const DELETE_COLOR = "DELETE_COLOR";
 export const UPDATE_COLOR = "UPDATE_COLOR";
 export const SET_VISIBLE_SHADES = "SET_VISIBLE_SHADES";
+export const TOGGLE_LOCK = "TOGGLE_LOCK";
 
 export const set_colors = (colors) => {
   return {
@@ -44,5 +45,12 @@ export const set_visible_shades = (color) => {
   return {
     type: SET_VISIBLE_SHADES,
     payload: { color },
+  };
+};
+
+export const toggle_lock = (colorId) => {
+  return {
+    type: TOGGLE_LOCK,
+    payload: { colorId },
   };
 };

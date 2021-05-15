@@ -6,6 +6,7 @@ import {
   delete_color,
   set_visible_shades,
   update_color,
+  toggle_lock,
 } from "../../../store/actions/newPaletteActions";
 import { show_snackbar } from "../../../store/actions/snackbarActions";
 
@@ -59,6 +60,8 @@ const Color = ({ color }) => {
 
   const showShades = () => dispatch(set_visible_shades(color.value));
 
+  const toggleLock = () => dispatch(toggle_lock(color.id));
+
   const showDeleteBtn = colors.length > 2;
   const shouldHideOptions = visibleShades && visibleShades !== color.value;
   const shouldShowShades = visibleShades === color.value;
@@ -101,8 +104,8 @@ const Color = ({ color }) => {
             </button>
           </CopyToClipboard>
 
-          <button className={classes.color__lock}>
-            <LockIcon />
+          <button className={classes.color__lock} onClick={toggleLock}>
+            {color.isLocked ? <LockIcon /> : <UnlockIcon />}
           </button>
 
           <button className={classes.color__shades} onClick={showShades}>

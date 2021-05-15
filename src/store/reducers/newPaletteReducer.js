@@ -5,6 +5,7 @@ import {
   DELETE_COLOR,
   UPDATE_COLOR,
   SET_VISIBLE_SHADES,
+  TOGGLE_LOCK,
 } from "../actions/newPaletteActions";
 
 const initialPalette = {
@@ -55,6 +56,14 @@ export const newPaletteReducer = (state = initialPalette, action) => {
       return {
         ...state,
         visibleShades: action.payload.color,
+      };
+
+    case TOGGLE_LOCK:
+      return {
+        ...state,
+        colors: state.colors.map((c) =>
+          c.id === action.payload.colorId ? { ...c, isLocked: !c.isLocked } : c
+        ),
       };
 
     default:
