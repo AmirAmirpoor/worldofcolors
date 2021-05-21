@@ -6,6 +6,7 @@ import {
   UPDATE_COLOR,
   SET_VISIBLE_SHADES,
   TOGGLE_LOCK,
+  CHANGE_SECONDARY_INDEX,
 } from "../actions/newPaletteActions";
 
 const initialPalette = {
@@ -13,6 +14,7 @@ const initialPalette = {
   colors: [],
   isFavorite: false,
   visibleShades: null,
+  secondaryIndex: 0,
 };
 
 export const newPaletteReducer = (state = initialPalette, action) => {
@@ -64,6 +66,12 @@ export const newPaletteReducer = (state = initialPalette, action) => {
         colors: state.colors.map((c) =>
           c.id === action.payload.colorId ? { ...c, isLocked: !c.isLocked } : c
         ),
+      };
+
+    case CHANGE_SECONDARY_INDEX:
+      return {
+        ...state,
+        secondaryIndex: action.payload.index,
       };
 
     default:

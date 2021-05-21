@@ -67,3 +67,21 @@ export const generateShades = ({ value: hex }) => {
   const shades = chroma.scale([first, mid, last]).mode("lch").colors(25);
   return _.uniq(shades);
 };
+
+export const getSecondaryValues = ({ value }) => {
+  const rgb = chroma(value).rgb().join(", ");
+  const hsl = chroma(value)
+    .hsl()
+    .map((c) => c.toFixed(2))
+    .join(", ");
+  const cmyk = chroma(value)
+    .cmyk()
+    .map((c) => c.toFixed(2))
+    .join(", ");
+  const lab = chroma(value)
+    .lab()
+    .map((c) => c.toFixed(2))
+    .join(", ");
+
+  return [rgb, hsl, cmyk, lab];
+};

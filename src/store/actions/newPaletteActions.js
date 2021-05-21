@@ -5,6 +5,7 @@ export const DELETE_COLOR = "DELETE_COLOR";
 export const UPDATE_COLOR = "UPDATE_COLOR";
 export const SET_VISIBLE_SHADES = "SET_VISIBLE_SHADES";
 export const TOGGLE_LOCK = "TOGGLE_LOCK";
+export const CHANGE_SECONDARY_INDEX = "CHANGE_SECONDARY_INDEX";
 
 export const set_colors = (colors) => {
   return {
@@ -52,5 +53,12 @@ export const toggle_lock = (colorId) => {
   return {
     type: TOGGLE_LOCK,
     payload: { colorId },
+  };
+};
+
+export const change_secondary_index = (index) => {
+  return {
+    type: CHANGE_SECONDARY_INDEX,
+    payload: { index },
   };
 };
