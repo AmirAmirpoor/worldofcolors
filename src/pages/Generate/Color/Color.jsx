@@ -5,13 +5,12 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   delete_color,
   set_visible_shades,
-  update_color,
   toggle_lock,
 } from "../../../store/actions/newPaletteActions";
 import { show_snackbar } from "../../../store/actions/snackbarActions";
 
 // color functions
-import { darkOrLight, generateShades } from "../../../helpers/colorFunctions";
+import { darkOrLight } from "../../../helpers/colorFunctions";
 
 // react-smooth-dnd
 import { Draggable } from "react-smooth-dnd";
@@ -31,6 +30,7 @@ import { OutlineLikeIcon } from "../../../helpers/icons";
 
 // styles
 import classes from "./Color.module.css";
+import Shades from "../Shades/Shades";
 
 const Color = ({ color }) => {
   const { colors, visibleShades } = useSelector((state) => state.newPalette);
@@ -43,7 +43,6 @@ const Color = ({ color }) => {
   }, []);
 
   const textColor = darkOrLight(color);
-  const shades = generateShades(color);
 
   const style = {
     background: color.value,
@@ -65,7 +64,6 @@ const Color = ({ color }) => {
   const showDeleteBtn = colors.length > 2;
   const shouldHideOptions = visibleShades && visibleShades !== color.value;
   const shouldShowShades = visibleShades === color.value;
-  const colorIndex = colors.findIndex((c) => c.id === color.id);
 
   return (
     <Draggable style={style}>
@@ -113,29 +111,7 @@ const Color = ({ color }) => {
           </button>
         </div>
 
-        <div
-          className={`${classes.shades__container} ${
-            shouldShowShades && classes.show
-          }`}
-        >
-          {shades.map((shade, idx) => {
-            return (
-              <div
-                key={idx}
-                className={classes.shade}
-                style={{ background: shade }}
-                onClick={() => dispatch(update_color(shade, colorIndex))}
-              >
-                {color.value === shade && (
-                  <div
-                    className={classes.current__shade}
-                    style={{ background: textColor }}
-                  ></div>
-                )}
-              </div>
-            );
-          })}
-        </div>
+        {shouldShowShades && <Shades color={color} />}
       </div>
     </Draggable>
   );

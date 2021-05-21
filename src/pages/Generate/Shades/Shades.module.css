@@ -1,0 +1,23 @@
+.shades__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.shade {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.current__shade {
+  width: 0.75em;
+  height: 0.75em;
+  border-radius: 50%;
+  opacity: 0.25;
+}
