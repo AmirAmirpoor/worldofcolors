@@ -18,6 +18,7 @@ import { BiMoveVertical as MoveIcon } from "react-icons/bi";
 import { HiLockOpen as UnlockIcon } from "react-icons/hi";
 import { HiLockClosed as LockIcon } from "react-icons/hi";
 import { HiViewGrid as GridIcon } from "react-icons/hi";
+import { VscAdd as PlusIcon } from "react-icons/vsc";
 
 export {
   CloseIcon,
@@ -38,4 +39,5 @@ export {
   LockIcon,
   UnlockIcon,
   GridIcon,
+  PlusIcon,
 };

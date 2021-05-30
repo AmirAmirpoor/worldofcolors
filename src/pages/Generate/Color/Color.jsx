@@ -2,11 +2,10 @@ import { useEffect } from "react";
 
 // redux stuff
 import { useSelector, useDispatch } from "react-redux";
-import {
-  delete_color,
-  set_visible_shades,
-  toggle_lock,
-} from "../../../store/actions/newPaletteActions";
+import { delete_color } from "../../../store/actions/newPaletteActions";
+import { set_colors } from "../../../store/actions/newPaletteActions";
+import { toggle_lock } from "../../../store/actions/newPaletteActions";
+import { set_visible_shades } from "../../../store/actions/newPaletteActions";
 import { show_snackbar } from "../../../store/actions/snackbarActions";
 
 // chroma-js
@@ -21,6 +20,9 @@ import { Draggable } from "react-smooth-dnd";
 // react-copy-to-clipboard
 import CopyToClipboard from "react-copy-to-clipboard";
 
+// components
+import Shades from "../Shades/Shades";
+
 // icons
 import { MoveIcon } from "../../../helpers/icons";
 import { CopyIcon } from "../../../helpers/icons";
@@ -30,10 +32,10 @@ import { GridIcon } from "../../../helpers/icons";
 import { CloseIcon } from "../../../helpers/icons";
 import { LikeIcon } from "../../../helpers/icons";
 import { OutlineLikeIcon } from "../../../helpers/icons";
+import { PlusIcon } from "../../../helpers/icons";
 
 // styles
 import classes from "./Color.module.css";
-import Shades from "../Shades/Shades";
 
 const Color = ({ color }) => {
   const { colors, visibleShades } = useSelector((state) => state.newPalette);
@@ -58,6 +60,25 @@ const Color = ({ color }) => {
     dispatch(show_snackbar("success", "color deleted"));
   };
 
+  const addColor = () => {
+    const index = colors.findIndex((c) => c.id === color.id);
+    const firstColor = colors[index].value;
+    const secondColor = colors[index + 1].value;
+
+    const averageColor = chroma.average([firstColor, secondColor]).hex();
+
+    const addedColor = {
+      value: averageColor,
+      id: Math.floor(Math.random() * 10000),
+    };
+
+    const first = colors.slice(0, index + 1);
+    const last = colors.slice(index + 1);
+
+    const updatedColors = [...first, addedColor, ...last];
+    dispatch(set_colors(updatedColors));
+  };
+
   const alertCopied = () => dispatch(show_snackbar("success", "color copied"));
 
   const showShades = () => dispatch(set_visible_shades(color.value));
@@ -65,8 +86,10 @@ const Color = ({ color }) => {
   const toggleLock = () => dispatch(toggle_lock(color.id));
 
   const showDeleteBtn = colors.length > 2;
+  const showAddBtn = colors.length < 10;
   const shouldHideOptions = visibleShades && visibleShades !== color.value;
   const shouldShowShades = visibleShades === color.value;
+  const isLastColor = color.id === colors[colors.length - 1].id;
 
   const rgb = chroma(color.value).rgb().join(", ");
 
@@ -87,6 +110,12 @@ const Color = ({ color }) => {
             shouldHideOptions && classes.hide
           }`}
         >
+          {showAddBtn && !isLastColor && (
+            <button className={classes.color__add} onClick={addColor}>
+              <PlusIcon />
+            </button>
+          )}
+
           <button className={classes.color__like}>
             <OutlineLikeIcon />
           </button>

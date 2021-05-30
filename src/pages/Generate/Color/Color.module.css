@@ -33,6 +33,7 @@
 
 .color__like,
 .color__delete,
+.color__add,
 .color__move,
 .color__copy,
 .color__lock,
@@ -79,5 +80,9 @@
 @media screen and (max-width: 500px) {
   .color {
     font-size: 0.85em;
+  }
+
+  .color__options {
+    gap: 0.75em;
   }
 }

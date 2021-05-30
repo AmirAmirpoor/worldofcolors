@@ -1,4 +1,3 @@
-import { sample } from "lodash";
 import {
   SET_COLORS,
   REORDER_COLORS,

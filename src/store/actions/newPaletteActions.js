@@ -1,6 +1,5 @@
 export const SET_COLORS = "SET_COLORS";
 export const REORDER_COLORS = "REORDER_COLORS";
-export const ADD_COLOR = "ADD_COLOR";
 export const DELETE_COLOR = "DELETE_COLOR";
 export const UPDATE_COLOR = "UPDATE_COLOR";
 export const SET_VISIBLE_SHADES = "SET_VISIBLE_SHADES";
