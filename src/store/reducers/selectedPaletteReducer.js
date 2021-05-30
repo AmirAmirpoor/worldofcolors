@@ -1,13 +1,9 @@
-import {
-  SELECT_PALETTE,
-  SELECT_COLOR,
-} from "../actions/selectedPaletteActions";
+import { SELECT_PALETTE } from "../actions/selectedPaletteActions";
+import { SELECT_COLOR } from "../actions/selectedPaletteActions";
 
-import {
-  REMOVE_FROM_PALETTES,
-  LIKE_PALETTE,
-  REMOVE_FROM_LIKED_PALETTES,
-} from "../actions/palettesActions";
+import { REMOVE_FROM_LIKED_PALETTES } from "../actions/palettesActions";
+import { REMOVE_FROM_PALETTES } from "../actions/palettesActions";
+import { LIKE_PALETTE } from "../actions/palettesActions";
 
 const initialState = {
   palette: null,

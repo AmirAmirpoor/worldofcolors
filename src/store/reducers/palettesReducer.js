@@ -1,10 +1,8 @@
-import {
-  SET_PALETTES,
-  ADD_TO_PALETTES,
-  REMOVE_FROM_PALETTES,
-  LIKE_PALETTE,
-  REMOVE_FROM_LIKED_PALETTES,
-} from "../actions/palettesActions";
+import { SET_PALETTES } from "../actions/palettesActions";
+import { ADD_TO_PALETTES } from "../actions/palettesActions";
+import { REMOVE_FROM_PALETTES } from "../actions/palettesActions";
+import { LIKE_PALETTE } from "../actions/palettesActions";
+import { REMOVE_FROM_LIKED_PALETTES } from "../actions/palettesActions";
 
 import { PALETTES } from "../../helpers/constants";
 

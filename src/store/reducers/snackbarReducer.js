@@ -1,4 +1,5 @@
-import { SHOW_SNACKBAR, HIDE_SNACKBAR } from "../actions/snackbarActions";
+import { SHOW_SNACKBAR } from "../actions/snackbarActions";
+import { HIDE_SNACKBAR } from "../actions/snackbarActions";
 
 const initialState = {
   isVisible: false,

@@ -1,11 +1,9 @@
-import {
-  SET_COLORS,
-  REORDER_COLORS,
-  DELETE_COLOR,
-  UPDATE_COLOR,
-  SET_VISIBLE_SHADES,
-  TOGGLE_LOCK,
-} from "../actions/newPaletteActions";
+import { SET_COLORS } from "../actions/newPaletteActions";
+import { REORDER_COLORS } from "../actions/newPaletteActions";
+import { DELETE_COLOR } from "../actions/newPaletteActions";
+import { UPDATE_COLOR } from "../actions/newPaletteActions";
+import { SET_VISIBLE_SHADES } from "../actions/newPaletteActions";
+import { TOGGLE_LOCK } from "../actions/newPaletteActions";
 
 const initialPalette = {
   name: "",

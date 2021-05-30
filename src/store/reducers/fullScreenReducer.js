@@ -1,4 +1,5 @@
-import { SHOW_FULLSCREEN, HIDE_FULLSCREEN } from "../actions/fullScreenActions";
+import { SHOW_FULLSCREEN } from "../actions/fullScreenActions";
+import { HIDE_FULLSCREEN } from "../actions/fullScreenActions";
 
 const initialState = {
   isVisible: false,

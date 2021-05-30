@@ -1,4 +1,5 @@
-import { SHOW_CONFIRM, HIDE_CONFIRM } from "../actions/confirmActions";
+import { SHOW_CONFIRM } from "../actions/confirmActions";
+import { HIDE_CONFIRM } from "../actions/confirmActions";
 
 const initialState = {
   isVisible: false,
