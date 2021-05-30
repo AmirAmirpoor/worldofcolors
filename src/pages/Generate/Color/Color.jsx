@@ -6,15 +6,14 @@ import {
   delete_color,
   set_visible_shades,
   toggle_lock,
-  change_secondary_index,
 } from "../../../store/actions/newPaletteActions";
 import { show_snackbar } from "../../../store/actions/snackbarActions";
 
+// chroma-js
+import chroma from "chroma-js";
+
 // color functions
-import {
-  darkOrLight,
-  getSecondaryValues,
-} from "../../../helpers/colorFunctions";
+import { darkOrLight } from "../../../helpers/colorFunctions";
 
 // react-smooth-dnd
 import { Draggable } from "react-smooth-dnd";
@@ -37,12 +36,8 @@ import classes from "./Color.module.css";
 import Shades from "../Shades/Shades";
 
 const Color = ({ color }) => {
-  const { colors, visibleShades, secondaryIndex } = useSelector(
-    (state) => state.newPalette
-  );
+  const { colors, visibleShades } = useSelector((state) => state.newPalette);
   const dispatch = useDispatch();
-
-  const secondaries = getSecondaryValues(color);
 
   useEffect(() => {
     return () => {
@@ -69,16 +64,11 @@ const Color = ({ color }) => {
 
   const toggleLock = () => dispatch(toggle_lock(color.id));
 
-  const changeSecondaryValue = () => {
-    const lastOne = secondaryIndex === secondaries.length - 1;
-    const updatedIndex = lastOne ? 0 : secondaryIndex + 1;
-    dispatch(change_secondary_index(updatedIndex));
-  };
-
   const showDeleteBtn = colors.length > 2;
   const shouldHideOptions = visibleShades && visibleShades !== color.value;
   const shouldShowShades = visibleShades === color.value;
-  const secondary = secondaries[secondaryIndex];
+
+  const rgb = chroma(color.value).rgb().join(", ");
 
   return (
     <Draggable style={style}>
@@ -89,12 +79,7 @@ const Color = ({ color }) => {
           }`}
         >
           <p className={classes.color__hex}>{color.value.slice(1)}</p>
-          <p
-            className={classes.color__secondary}
-            onClick={changeSecondaryValue}
-          >
-            {secondary}
-          </p>
+          <p className={classes.color__secondary}>{rgb}</p>
         </div>
 
         <div
