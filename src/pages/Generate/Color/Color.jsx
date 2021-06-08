@@ -3,6 +3,7 @@ import { useEffect } from "react";
 // redux stuff
 import { useSelector, useDispatch } from "react-redux";
 import { delete_color } from "../../../store/actions/newPaletteActions";
+import { change_color_in_colorpicker } from "../../../store/actions/newPaletteActions";
 import { set_colors } from "../../../store/actions/newPaletteActions";
 import { toggle_lock } from "../../../store/actions/newPaletteActions";
 import { set_visible_shades } from "../../../store/actions/newPaletteActions";
@@ -85,6 +86,8 @@ const Color = ({ color }) => {
 
   const toggleLock = () => dispatch(toggle_lock(color.id));
 
+  const hexClicked = () => dispatch(change_color_in_colorpicker(color));
+
   const showDeleteBtn = colors.length > 2;
   const showAddBtn = colors.length < 10;
   const shouldHideOptions = visibleShades && visibleShades !== color.value;
@@ -101,7 +104,9 @@ const Color = ({ color }) => {
             shouldHideOptions && classes.hide
           }`}
         >
-          <p className={classes.color__hex}>{color.value.slice(1)}</p>
+          <p className={classes.color__hex} onClick={hexClicked}>
+            {color.value.slice(1)}
+          </p>
           <p className={classes.color__secondary}>{rgb}</p>
         </div>
 

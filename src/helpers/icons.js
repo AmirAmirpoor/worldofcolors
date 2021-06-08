@@ -19,6 +19,7 @@ import { HiLockOpen as UnlockIcon } from "react-icons/hi";
 import { HiLockClosed as LockIcon } from "react-icons/hi";
 import { HiViewGrid as GridIcon } from "react-icons/hi";
 import { VscAdd as PlusIcon } from "react-icons/vsc";
+import { HiArrowNarrowRight as ArrowRight } from "react-icons/hi";
 
 export {
   CloseIcon,
@@ -40,4 +41,5 @@ export {
   UnlockIcon,
   GridIcon,
   PlusIcon,
+  ArrowRight,
 };

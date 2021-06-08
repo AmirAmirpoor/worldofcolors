@@ -29,6 +29,7 @@
   font-weight: 600;
   text-transform: uppercase;
   font-size: 1.5em;
+  cursor: pointer;
 }
 
 .color__like,

@@ -4,12 +4,14 @@ import { DELETE_COLOR } from "../actions/newPaletteActions";
 import { UPDATE_COLOR } from "../actions/newPaletteActions";
 import { SET_VISIBLE_SHADES } from "../actions/newPaletteActions";
 import { TOGGLE_LOCK } from "../actions/newPaletteActions";
+import { CHANGE_COLOR_IN_COLORPICKER } from "../actions/newPaletteActions";
 
 const initialPalette = {
   name: "",
   colors: [],
   isFavorite: false,
   visibleShades: null,
+  colorInColorpicker: null,
 };
 
 export const newPaletteReducer = (state = initialPalette, action) => {
@@ -61,6 +63,12 @@ export const newPaletteReducer = (state = initialPalette, action) => {
         colors: state.colors.map((c) =>
           c.id === action.payload.colorId ? { ...c, isLocked: !c.isLocked } : c
         ),
+      };
+
+    case CHANGE_COLOR_IN_COLORPICKER:
+      return {
+        ...state,
+        colorInColorpicker: action.payload.color,
       };
 
     default:
