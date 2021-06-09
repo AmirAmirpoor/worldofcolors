@@ -1,0 +1,13 @@
+.row {
+  flex: 1;
+  display: flex;
+}
+
+.row > div {
+  flex: 1;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

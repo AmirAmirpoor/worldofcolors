@@ -33,7 +33,11 @@ const Generate = () => {
   return (
     <div className="container">
       <div className="main">
-        <Colors />
+        <div className={classes.main__content}>
+          <div className={classes.colors}>
+            <Colors />
+          </div>
+        </div>
       </div>
       <div className="aside">
         {/* FOR TEST RANDOM COLORS FUNCTION */}
