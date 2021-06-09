@@ -8,6 +8,7 @@ import { set_colors } from "../../../store/actions/newPaletteActions";
 import { toggle_lock } from "../../../store/actions/newPaletteActions";
 import { set_visible_shades } from "../../../store/actions/newPaletteActions";
 import { show_snackbar } from "../../../store/actions/snackbarActions";
+import { open_panel } from "../../../store/actions/mobilePanelActions";
 
 // chroma-js
 import chroma from "chroma-js";
@@ -86,7 +87,10 @@ const Color = ({ color }) => {
 
   const toggleLock = () => dispatch(toggle_lock(color.id));
 
-  const hexClicked = () => dispatch(change_color_in_colorpicker(color));
+  const hexClicked = () => {
+    dispatch(change_color_in_colorpicker(color));
+    dispatch(open_panel());
+  };
 
   const showDeleteBtn = colors.length > 2;
   const showAddBtn = colors.length < 10;

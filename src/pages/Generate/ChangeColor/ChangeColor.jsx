@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { set_colors } from "../../../store/actions/newPaletteActions";
 import { change_color_in_colorpicker } from "../../../store/actions/newPaletteActions";
+import { close_panel } from "../../../store/actions/mobilePanelActions";
 
 // components
 import { HexColorPicker } from "react-colorful";
@@ -50,22 +51,24 @@ const ChangeColor = () => {
 
     dispatch(set_colors(updatedColors));
     dispatch(change_color_in_colorpicker(null));
+    dispatch(close_panel());
+  };
+
+  const cancel = () => {
+    dispatch(change_color_in_colorpicker(null));
+    dispatch(close_panel());
   };
 
   return (
     <div className={classes.changeColor}>
       <div className={classes.fromTo}>
-        <div>
-          <div style={fromStyles}>
-            <span>FROM</span>
-          </div>
+        <div style={fromStyles}>
+          <span>FROM</span>
         </div>
 
         <ArrowRight className={classes.fromTo__arrow} />
-        <div>
-          <div style={toStyles}>
-            <span>TO</span>
-          </div>
+        <div style={toStyles}>
+          <span>TO</span>
         </div>
       </div>
 
@@ -73,9 +76,14 @@ const ChangeColor = () => {
         <HexColorPicker className="colorpicker" color={to} onChange={setTo} />
       </div>
 
-      <button className="btn" onClick={changeColor}>
-        Change color
-      </button>
+      <div className={classes.changeColor__actions}>
+        <button className="btn" onClick={changeColor}>
+          Change color
+        </button>
+        <button className="btn" onClick={cancel}>
+          cancel
+        </button>
+      </div>
     </div>
   );
 };
